@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+{% load blog_tags %}
+{% load static %}
+<html>
+<head>
+    <title>篮友论坛</title>
+
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- css -->
+    <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="{% static 'blog/css/pace.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/custom.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/highlights/github.css' %}">
+
+    <!-- js -->
+    <script src="{% static 'blog/js/jquery-2.1.3.min.js' %}"></script>
+    <script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'blog/js/pace.min.js' %}"></script>
+    <script src="{% static 'blog/js/modernizr.custom.js' %}"></script>
+
+    <style>
+        span.highlighted {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <header id="site-header">
+        <div class="row">
+            <div class="col-md-4 col-sm-5 col-xs-8">
+                <div class="logo">
+                    <h1><a href="{% url 'blog:index' %}"><b>篮友论坛</b></a></h1>
+                </div>
+            </div><!-- col-md-4 -->
+            <div class="col-md-8 col-sm-7 col-xs-4">
+                <nav class="main-nav" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" id="trigger-overlay" class="navbar-toggle">
+                            <span class="ion-navicon"></span>
+                        </button>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if user.is_authenticated %}
+                                <li class="cl-effect-11"><a href=""
+                                                            data-hover="{{ user.username }}">{{ user.username }}</a>
+                                </li>
+                                <li class="cl-effect-11"><a href="#"><img src="{{ user.headshot.url }} " height="40"
+                                                                          width="40"/></a></li>
+                                <li class="cl-effect-11"><a href="{% url 'logout' %}?next={{ request.path }}"
+                                                            data-hover="注销">注销</a></li>
+                                <li class="cl-effect-11"><a href="{% url 'password_change' %}?next={{ request.path }}"
+                                                            data-hover="修改密码">修改密码</a></li>
+                            {% else %}
+                                <li class="cl-effect-11"><a href="{% url 'login' %}?next={{ request.path }}"
+                                                            data-hover="登录">登录</a></li>
+                                <li class="cl-effect-11"><a href="{% url 'users:register' %}?next={{ request.path }}"
+                                                            data-hover="注册">注册</a></li>
+                            {% endif %}
+                            <li class="cl-effect-11"><a href="{% url 'blog:index' %}" data-hover="首页">首页</a></li>
+                            <li class="cl-effect-11"><a href="blog/about.html" data-hover="资讯">资讯</a></li>
+                            <li class="cl-effect-11"><a href="{% url 'blog:knowledge' %}" data-hover="知识">知识</a></li>
+                            <li class="cl-effect-11"><a href="blog/contact.html" data-hover="图说篮球">图说篮球</a></li>
+                            <li class="cl-effect-11"><a href="blog/contact.html" data-hover="球鞋潮我看">球鞋潮我看</a></li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </nav>
+                <div id="header-search-box">
+                    <a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>
+                    <div id="search-form" class="search-form">
+                        <form role="search" method="get" id="searchform" action="{% url 'haystack_search' %}">
+                            <input type="search" name="q" placeholder="搜索" required>
+                            <button type="submit"><span class="ion-ios-search-strong"></span></button>
+                        </form>
+                    </div>
+                </div>
+            </div><!-- col-md-8 -->
+        </div>
+    </header>
+</div>
+<div class="copyrights">Collect from <a href="http://www.cssmoban.com/">网页模板</a></div>
+
+<div class="content-body">
+    <div class="container">
+        <div class="row">
+            <main class="col-md-8">
+    篮球的发展历程
+
+    篮球运动是1891年由美国人詹姆斯奈史密斯发明的。当时，他在马萨诸塞州斯普林菲尔德基督教青年会国际训练学校任教。
+    由于当地盛产桃子，这里的儿童又非常喜欢做用球投入桃子筐的游戏。这使他从中得到启发，并博采足球、曲棍球等其它球类项目的特点，创编了篮球游戏。
+
+
+
+    最初篮球游戏比较简单，场地大小和参加游戏的人数没有限制。
+    比赛队员分成人数相等的两队，分别站在球场的两端，在裁判员向球场中央抛球后，双方队员立即冲进场内抢球，并力争将球投进对方的篮筐。
+    因为桃筐是有底的，球投中以后就留在篮子里，人必须登上专设的梯子才能将球从篮筐里取出。
+
+    随着场地设施的不断改进，篮筐取消了筐底，并改用铁圈代替桃篮，用木板制成篮板代替铁丝挡网，场地增设了中线、中圈和罚球线，比赛改由中场跳球开始。
+    与此同时，场上比赛队员也通常改为每队5人，开始有后卫、守卫、中锋、前锋、留守等位置之分。
+    此外，奈史密斯制订了一个不太完善的竞赛规则，共13个条款，其中规定不允许带球跑、抱人、推人、绊人、打人等。
+    这大大提高了篮球游戏的趣味性，并且吸引了更多的人来参加这一游戏，从而使篮球运动很快普及到了全美国。
+
+
+
+    1892年，篮球运动首先从美国传入墨西哥，并很快在墨西哥各地得到开展。
+    这样，墨西哥成为除美国外，第一个开展篮球运动的国家。此后，这项运动先后传入法国、英国、中国、巴西、捷克斯洛伐克、澳大利亚、黎巴嫩等国家，在世界范围内得到了开展、普及和发展。
+
+    1895年，美国人鲍勃盖利将篮球传入中国，1896年天津基督教育青年会举行了我国第一次篮球游戏表演。
+    之后再天津、北京等城市青年会中开展起来。在1910年旧中国首届全国运动会上，篮球首次被列为表演项目。
+    1914年的第二届全运会上篮球被列为男子正式竞赛项目，1924年在第三届全运会上被列为女子正式竞赛项目。篮球自1951年起一直是亚运会的正式比赛项目。
+
+    1932年国际业余篮球联合会成立，男子篮球被国际奥委会承认为奥运会正式比赛项目。1946年，美国出现职业篮球联赛，并发展为目前的NBA。
+
+
+
+    篮球的比赛场地
+
+    篮球比赛的标准场地长28米、宽15米，四条界线外至少2米处不得有任何障碍物，如在室内则天花板的高度应至少为7米。
+    球场分中线、前场和后场，中线上的中圈和前、后场罚球区罚球线上的两个半圆半径均为1米80。
+    篮圈下面的矩形为限制区，通常称禁区。前、后场内的拱形弧线外的地区称3分投篮区，在拱形弧线外投篮命中得3分。
+
+
+
+    篮球的运动术语
+
+    扣篮：运动员用单手或双手持球，跳起在空中自上而下直接将球扣进篮圈。
+
+    补篮：投篮不中时，运动员跳起在空中将球补进篮内。
+
+    卡位：进攻人运用脚步动作把防守者挡在自己身后，这种步法叫卡位。
+
+    领接球：顺传球飞行方向移动，顺势接球。
+
+    错位防守：防守人站位在自己所防守的进攻人身侧，阻挠他接球叫错位防守。
+
+    要位：进攻人用身体把防守人挡在身后，占据有利的接球位置。
+
+    突破：运球超越防守人。
+
+    空切：进攻人空手向篮跑动。
+
+    一传：获球者由守转攻的第1次传球。
+
+    盖帽：进攻人投篮出手时，防守人设法在空中将球打掉的动作。
+
+    补位：当1个防守人失掉正确防守位置时，另一防守人及时补占其正确防守位置。
+
+    协防：协助同伴防守。
+
+    紧逼防守：贴近进攻人，不断运用攻击性防守动作，威胁对方持球的安全或不让对方接球。
+
+    斜插：从边线向球篮或者向球场中间斜线快跑。
+
+    时间差：在投篮时，为躲避对方防守的封盖，利用空中停留改变投篮出手时间。
+
+
+
+    篮球比赛的常见基本规则
+
+    3秒钟规则：
+    某队控制球时，同队队员在对方禁区内停留不得超过3秒钟。
+    在比赛过程中或控球后在界外掷界外球的情况下，只要同方队员在对方禁区内停留超过3秒钟，裁判员会立即鸣哨，判罚3秒违例。
+
+    5秒钟规则：
+    当一个持球队员被严密防守，在5 秒钟内没有传球、投球、滚球或运球时，也将宣判违例。
+    过去5秒违例判争球，现在则由对方队员就近掷界外球。
+
+    8秒钟规则：
+    一个队从后场控制球开始，必须在8秒钟内将球推进到前场，否则判8秒钟违例，由对方掷界外球。
+
+    24秒钟规则：
+    一个队在场上控制球后，必须在24秒钟内出手投篮，否则判24秒违例。
+    过去如在24秒钟内球被对方击出界外后将重新计算24秒，现在则从边线掷界外球后不再重新计算24秒，
+    而是在24秒钟中的剩余时间内必须出手投篮，否则仍被判为24秒违例，判由对方掷界外球。
+
+    全队7次犯规规则和一加一罚球规则：
+    比赛每半时，一个队的队员侵人犯规和技术犯规次数累计已达7次，此后这个队的任何一个队员再发生侵人犯规或技术犯规，
+    均将执行一加一罚球规则，判给被侵犯的对方队员罚球一次，如罚球成功，由这个队员再追加罚球一次;
+    如第一次罚球不中，比赛应继续进行，不再给予追加罚球的机会。如罚球者罚出的球未触及篮圈，则判为违例，由对方在边线掷界外球。
+            </main>
+            <aside class="col-md-4">
+                {% block toc %}
+                {% endblock %}
+                <div class="widget widget-recent-posts">
+                    <h3 class="widget-title">最新文章</h3>
+                    {% get_recent_posts as recent_post_list %}
+                    <ul>
+                        {% for post in recent_post_list %}
+                            <li>
+                                <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                            </li>
+                        {% empty %}
+                            暂无文章
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="widget widget-archives">
+                    <h3 class="widget-title">归档</h3>
+                    {% archives as date_list %}
+                    <ul>
+                        {% for date in date_list %}
+                            <li>
+                                <a href="{% url 'blog:archives' date.year date.month %}">{{ date.year }}年{{ date.month }}月</a>
+                            </li>
+                        {% empty %}
+                            暂无归档
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="widget widget-category">
+                    <h3 class="widget-title">分类</h3>
+                    {% get_categories as category_list %}
+                    <ul>
+                        {% for category in category_list %}
+                            <li>
+                                <a href="{% url 'blog:categories' category.pk %}">{{ category.name }}<span
+                                        class="post-count">({{ category.num_posts }})</span></a>
+                            </li>
+                        {% empty %}
+                            暂无分类
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="widget widget-tag-cloud">
+                    <h3 class="widget-title">标签云</h3>
+                    {% get_tags as tag_list %}
+                    <ul>
+                        {% for tag in tag_list %}
+                            <li>
+                                <a href="{% url 'blog:tags' tag.pk %}">{{ tag.name }}</a>
+                            </li>
+                        {% empty %}
+                            暂无标签！
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="rss">
+                    <a href="{% url 'rss' %}"><span class="ion-social-rss-outline"></span> RSS 订阅</a>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer id="site-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="copyright">Copyright © 1998 - 2019 LanFriends. All Rights Reserved<a href="http://www.baidu.com/"
+                                                        target="_blank" title="模板之家"></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Mobile Menu -->
+<div class="overlay overlay-hugeinc">
+    <button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
+    <nav>
+        <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="blog/full-width.html">资讯</a></li>
+            <li><a href="knowledge.html">知识</a></li>
+            <li><a href="blog/contact.html">图说篮球</a></li>
+            <li><a href="blog/contact.html">球鞋潮我看</a></li>
+        </ul>
+    </nav>
+</div>
+
+<script src="{% static 'blog/js/script.js' %}"></script>
+
+</body>
+</html>
